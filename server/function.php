@@ -21,6 +21,13 @@ function check_pass($password)
 }
 function check_fname($fname)
 {
+    if (strlen($fname) <=3) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"نام نمیتواند کمتر از 3 حروف باشد");
+        $out=json_encode($json);
+        echo $out;
+        exit;
+    }
     if (strstr($fname,"$") || strstr($fname,"_" ) || strstr($fname,"@") || strstr($fname , "*")  ||  strstr($fname , "%") || strstr($fname , "!")) 
     {
         $json=array('status'=>FALSE , 'data'=>"نام را صحیح وارد کنید");
@@ -31,6 +38,13 @@ function check_fname($fname)
 }
 function check_lname($lname)
 {
+    if (strlen($lname) <=3) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"نام خانوادگی نمیتواند کمتر از 3 حروف باشد");
+        $out=json_encode($json);
+        echo $out;
+        exit;
+    }
     if (strstr($lname , "$") || strstr($lname , "_" ) || strstr($lname , "@") || strstr($lname , "*")  ||  strstr($lname , "%") || strstr($lname , "!")) 
     {
         $json=array('status'=>FALSE , 'data'=>"نام خانوادگی را صحیح وارد کنید");
@@ -76,7 +90,6 @@ function check_email_tel($result , $email , $tel)
     }
 }
     //_______________________________________________________________________LOGIN_______________________________________________________________________
-
 function passverify($connection , $password , $sql)
 {
     $result=mysqli_query($connection,$sql);
