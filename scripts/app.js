@@ -4,81 +4,26 @@ const loginForm = $("form#login");
 // Create empty let for create url and send to back-end
 let information, url;
 
-let flex = window.location.href;
-
-flex += "/../"
-
 // Check Exist RegisterForm
 if (registerForm[0]) {
   registerForm[0].addEventListener("submit", (e) => {
-    // Off Default Prevent
-    e.preventDefault();
-    // Get Form inputs value and create array
-    information = registerForm.serializeArray();
-    // Import True URL :)
-    // url = `http://localhost/test0/server/register.php?register=${JSON.stringify(
-    //   information
-    // )}`;
-
-    // file:///home/mobin/sherkat/loginform/
-
-    url = `${flex}/server/register.php?register=${JSON.stringify(
-      information
-    )}`
-
-    // Call Register.php (main back-end code) ajax
-    $.ajax(url, {
-      // Sended Data Type
-      dataType: "json",
-      // Payload for trust
-      body: information,
-      // After Success Call
-      success: function (data, status, xhr) {
-        console.log("PayLoad : ", data);
-        console.log("Status : ", status);
-        console.log("Response : ", xhr);
-      },
-      // After Error Call
-      error: function (data, status, xhr) {
-        console.error("PayLoad : ", data);
-        console.error("Status : ", status);
-        console.error("Response : ", xhr);
-      },
-    });
+    DUPLICATE(e, "register");
   });
 } else if (loginForm[0]) {
   loginForm[0].addEventListener("submit", (e) => {
-    // Off Default Prevent
-    e.preventDefault();
-    // Get Form inputs value and create array
-    information = loginForm.serializeArray();
-    // Import True URL :)
-    // url = `http://localhost/test0/server/login.php?login==${JSON.stringify(
-    //   information
-    // )}`;
-
-    url = `${flex}/server/login.php?login=${JSON.stringify(
-      information
-    )}`
-
-    // Call Register.php (main back-end code) ajax
-    $.ajax(url, {
-      // Sended Data Type
-      dataType: "json",
-      // Payload for trust
-      body: information,
-      // After Success Call
-      success: function (data, status, xhr) {
-        console.log("PayLoad : ", data);
-        console.log("Status : ", status);
-        console.log("Response : ", xhr);
-      },
-      // After Error Call
-      error: function (data, status, xhr) {
-        console.error("PayLoad : ", data);
-        console.error("Status : ", status);
-        console.error("Response : ", xhr);
-      },
-    });
+    DUPLICATE(e, "login");
   });
+}
+
+function DUPLICATE(e, page) {
+  e.preventDefault();
+
+  // Get Form inputs value and create array
+  information = registerForm.serializeArray();
+
+  url = `server/${page}.php?${page}=${JSON.stringify(information)}`;
+
+  console.log(url);
+  // Call Register.php (main back-end code) ajax
+  $.ajax(url);
 }
