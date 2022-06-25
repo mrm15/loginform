@@ -27,26 +27,43 @@ foreach ($_REQUEST as $key => $value)
                 {
                     $fname=$r['value'];
                     $fname = preg_replace("/(?<!\s);(?!\s)/", "" , $fname);
+                    $fname = preg_replace('/[0-9]+/', '', $fname);
                 }
                 if ($r['name'] == "lname") 
                 {
                     $lname=$r['value'];
                     $lname = preg_replace("/(?<!\s);(?!\s)/", "", $lname);
+                    $lname = preg_replace('/[0-9]+/', '', $lname);
                 }
                 if ($r['name'] == "email") 
                 {
                     $email=$r['value'];
                     $email = preg_replace("/(?<!\s);(?!\s)/", "", $email);
                 }
-
                 if ($r['name'] == "tel") 
                 {
-                    check_tel($r);
+                    $tel=$r['value'];
+                    $tel = preg_replace("/(?<!\s);(?!\s)/", "", $tel);
+                    if (strlen($tel) < 11 || strlen($tel) > 11 && $tel[0] == 0) 
+                    {
+                        $json=array('status'=>FALSE , 'data'=>"شماره تلفن حتما باید 11 رقم باشد و با صفر شروع شود");
+                        $out=json_encode($json);
+                        echo $out;
+                        exit;
+                    }
                 }
-
                 if ($r['name'] == "password") 
                 {
-                    check_pass($r);
+                    $password=$r['value'];
+                    $password = preg_replace("/(?<!\s);(?!\s)/", "", $password);
+                
+                    if (strlen($password) < 8) 
+                    {
+                        $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل شامل 8 کاراکتر باشد");
+                        $out=json_encode($json);
+                        echo $out;
+                        exit;
+                    }
                 }
             }
         }
