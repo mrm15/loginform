@@ -14,7 +14,6 @@ function insert($password , $fname , $lname , $email , $connection , $tel)
     } 
 }
 
-
 function check_email_tel($result , $email , $tel)
 {
     foreach ($result as $o) 
@@ -38,10 +37,7 @@ function check_email_tel($result , $email , $tel)
         }
     }
 }
-
     //_______________________________________________________________________LOGIN_______________________________________________________________________
-
-
     function passverify($connection , $password , $sql)
     {
         $result=mysqli_query($connection,$sql);
@@ -52,8 +48,8 @@ function check_email_tel($result , $email , $tel)
 
             if (password_verify($password , $data['password'])) 
             {
-                $_SESSION['Id']=$data['id'];
-                $_SESSION['name']=$data['fname'];
+                // $_SESSION['Id']=$data['id'];
+                // $_SESSION['name']=$data['fname'];
 
                 $messagg=array('status'=>TRUE , 'data'=>"شما وارد شدید");
                 $payaa=json_encode($messagg);
