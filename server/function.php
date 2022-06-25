@@ -21,7 +21,6 @@ function check_pass($password)
 }
 function check_fname($fname)
 {
-    
     if (strstr($fname,"$") || strstr($fname,"_" ) || strstr($fname,"@") || strstr($fname , "*")  ||  strstr($fname , "%") || strstr($fname , "!")) 
     {
         $json=array('status'=>FALSE , 'data'=>"نام را صحیح وارد کنید");
@@ -70,48 +69,42 @@ function check_email_tel($result , $email , $tel)
         if($tel1 == $tel) 
         {
             $messagg=array('status'=>FALSE , 'data'=>"شماره تلفن شما تکراری است");
-            $paya=json_encode($messagg , JSON_PRESERVE_ZERO_FRACTION| JSON_UNESCAPED_SLASHES| JSON_UNESCAPED_UNICODE);
+            $paya=json_encode($messagg , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
             echo $paya;
             return;
         }
     }
 }
     //_______________________________________________________________________LOGIN_______________________________________________________________________
-    
-    function passverify($connection , $password , $sql)
+
+function passverify($connection , $password , $sql)
+{
+    $result=mysqli_query($connection,$sql);
+
+    if (mysqli_num_rows($result) > 0) 
     {
-        $result=mysqli_query($connection,$sql);
+        $data=mysqli_fetch_assoc($result);
 
-        if (mysqli_num_rows($result) > 0) 
+        if (password_verify($password , $data['password'])) 
         {
-            $data=mysqli_fetch_assoc($result);
-
-            if (password_verify($password , $data['password'])) 
-            {
-                $messagg=array('status'=>TRUE , 'data'=>"شما وارد شدید");
-                $payaa=json_encode($messagg);
-                echo $payaa;
-            }
-            else 
-            {
-                $messagg=array('status'=>FALSE , 'data'=>"رمز عبور نادرست است");
-                $payaa=json_encode($messagg);
-                echo $payaa;
-            }
+            $messagg=array('status'=>TRUE , 'data'=>"شما وارد شدید");
+            $payaa=json_encode($messagg);
+            echo $payaa;
         }
         else 
         {
-            $messagg=array('status'=>FALSE , 'data'=>"کاربر با این مشخصات وجود ندارد");
+            $messagg=array('status'=>FALSE , 'data'=>"رمز عبور نادرست است");
             $payaa=json_encode($messagg);
             echo $payaa;
-        } 
+        }
     }
-
-
-
-
-
-
+    else 
+    {
+        $messagg=array('status'=>FALSE , 'data'=>"کاربر با این مشخصات وجود ندارد");
+        $payaa=json_encode($messagg);
+        echo $payaa;
+    } 
+}
     // _______________________________________________________________________Forgetpass_______________________________________________________________________
 
     // function
