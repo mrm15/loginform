@@ -33,17 +33,25 @@ foreach ($_REQUEST as $key => $value)
                 }
             }
         }
-
-        $sql ="SELECT * FROM register where `email`='$email' ";
-
-        if (mysqli_query($connection,$sql) )
-        {   
-            passverify($connection , $password , $sql);
-        }
-        else
+        if (!empty($email) && !empty($password))
         {
-            echo mysqli_error($connection);
-        }  
+            $sql ="SELECT * FROM register where `email`='$email' ";
+
+            if (mysqli_query($connection,$sql) )
+            {   
+                passverify($connection , $password , $sql);
+            }
+            else
+            {
+                echo mysqli_error($connection);
+            }  
+        }
+        else 
+        {
+            $json=array('status'=>FALSE , 'data'=>"فیلد ها نمیتواند خالی باشد");
+            $out=json_encode($json);
+            echo $out;
+        }
 
     }
 }
