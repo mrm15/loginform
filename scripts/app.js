@@ -12,7 +12,7 @@ if (registerForm[0]) {
     // Get Form inputs value and create array
     information = registerForm.serializeArray();
     // Import True URL :)
-    url = `http://localhost/test0/server/register.php?register=${JSON.stringify(
+    url = `http://localhost/git/test0/server/register.php?register=${JSON.stringify(
       information
     )}`;
 
@@ -43,7 +43,7 @@ if (registerForm[0]) {
     // Get Form inputs value and create array
     information = loginForm.serializeArray();
     // Import True URL :)
-    url = `http://localhost/test0/server/login.php?login=${JSON.stringify(
+    url = `http://localhost/git/test0/server/login.php?login=${JSON.stringify(
       information
     )}`;
 
