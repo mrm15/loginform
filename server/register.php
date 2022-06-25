@@ -14,16 +14,12 @@ header('Content-Type: text/html; charset=utf-8');
 
 
 $email1 = $tel1 = [0];
-// var_dump($_REQUEST);
 foreach ($_REQUEST as $key => $value) 
 {
-    // var_dump($_REQUEST);
     if ($key =="register") 
     {
         $registerdata=$value;
         $registerdata=json_decode($registerdata,TRUE);
-
-        // define('FILTER_SANITIZE_STRING' , 513 );
         if (is_array($registerdata) || is_object($registerdata)) 
         {
             foreach ($registerdata as $r) 
@@ -55,8 +51,10 @@ foreach ($_REQUEST as $key => $value)
                 }
             }
         }
+
         if (!empty($fname) && !empty($lname) && !empty($email) && !empty($tel)  && !empty($password))
         {
+
             $query = "SELECT * FROM register";
             $result = mysqli_query($connection, $query);
     
@@ -67,13 +65,12 @@ foreach ($_REQUEST as $key => $value)
             else
             {
                 select($connection);
-    
                 check_information($result,$email,$tel);
             } 
         }
         else 
         {
-            $json=array('status'=>TRUE , 'data'=>"فیلد ها نمیتواند خالی باشد");
+            $json=array('status'=>FALSE , 'data'=>"فیلد ها نمیتواند خالی باشد");
             $out=json_encode($json);
             echo $out;
         }
