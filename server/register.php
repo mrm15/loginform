@@ -27,13 +27,15 @@ foreach ($_REQUEST as $key => $value)
                 {
                     $fname=$r['value'];
                     $fname = preg_replace("/(?<!\s);(?!\s)/", "" , $fname);
-                    $fname = preg_replace('/[0-9]+/', '', $fname);
+                    // $fname = preg_replace('/[0-9]+/', '', $fname);  
+                    // $fname = preg_replace("/[^A-Za-z0-9_\?\-\(\)\! \ا\ب\پ\ت\ث\ج\چ\ح\خ\د\ذ\ر\ز\ژ\س\ش\ص\ض\ط\ظ\ع\غ\ف\ق\ک\گ\ل\م\ن\و\ه\ی\ك\آ\ي\ئ]/", "", $fname);
                 }
                 if ($r['name'] == "lname") 
                 {
                     $lname=$r['value'];
                     $lname = preg_replace("/(?<!\s);(?!\s)/", "", $lname);
-                    $lname = preg_replace('/[0-9]+/', '', $lname);
+                    // $lname = preg_replace('/[0-9]+/', '', $lname);
+                    // $lname = preg_replace("/[^A-Za-z0-9_\?\-\(\)\! \ا\ب\پ\ت\ث\ج\چ\ح\خ\د\ذ\ر\ز\ژ\س\ش\ص\ض\ط\ظ\ع\غ\ف\ق\ک\گ\ل\م\ن\و\ه\ی\ك\آ\ي\ئ]/", "", $lname);
                 }
                 if ($r['name'] == "email") 
                 {
@@ -44,34 +46,22 @@ foreach ($_REQUEST as $key => $value)
                 {
                     $tel=$r['value'];
                     $tel = preg_replace("/(?<!\s);(?!\s)/", "", $tel);
-
                 }
                 if ($r['name'] == "password") 
                 {
                     $password=$r['value'];
                     $password = preg_replace("/(?<!\s);(?!\s)/", "", $password);
-                
-
                 }
             }
         }
 
         if (!empty($fname) && !empty($lname) && !empty($email) && !empty($tel)  && !empty($password))
         {
-            if (strlen($tel) < 11 || strlen($tel) > 11 && $tel[0] == 0) 
-            {
-                $json=array('status'=>FALSE , 'data'=>"شماره تلفن حتما باید 11 رقم باشد و با صفر شروع شود");
-                $out=json_encode($json);
-                echo $out;
-                exit;
-            }
-            if (strlen($password) < 8) 
-            {
-                $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل شامل 8 کاراکتر باشد");
-                $out=json_encode($json);
-                echo $out;
-                exit;
-            }
+            check_fname($fname);
+            check_lname($lname);
+            check_tel($tel);
+            check_pass($password);
+
             $query = "SELECT * FROM register WHERE `tel`='$tel' || `email`='$email'";
             $result = mysqli_query($connection, $query);
     
