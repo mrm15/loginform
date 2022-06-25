@@ -1,8 +1,6 @@
 <?php
-function check_tel($r)
+function check_tel($tel)
 {
-    $tel=$r['value'];
-    $tel = preg_replace("/(?<!\s);(?!\s)/", "", $tel);
     if (strlen($tel) < 11 || strlen($tel) > 11 && $tel[0] == 0) 
     {
         $json=array('status'=>FALSE , 'data'=>"شماره تلفن حتما باید 11 رقم باشد و با صفر شروع شود");
@@ -11,12 +9,8 @@ function check_tel($r)
         exit;
     }
 }
-
-function check_pass($r)
+function check_pass($password)
 {
-    $password=$r['value'];
-    $password = preg_replace("/(?<!\s);(?!\s)/", "", $password);
-
     if (strlen($password) < 8) 
     {
         $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل شامل 8 کاراکتر باشد");
@@ -25,7 +19,27 @@ function check_pass($r)
         exit;
     }
 }
-
+function check_fname($fname)
+{
+    
+    if (strstr($fname,"$") || strstr($fname,"_" ) || strstr($fname,"@") || strstr($fname , "*")  ||  strstr($fname , "%") || strstr($fname , "!")) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"نام را صحیح وارد کنید");
+        $out=json_encode($json);
+        echo $out;
+        exit;
+    }
+}
+function check_lname($lname)
+{
+    if (strstr($lname , "$") || strstr($lname , "_" ) || strstr($lname , "@") || strstr($lname , "*")  ||  strstr($lname , "%") || strstr($lname , "!")) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"نام خانوادگی را صحیح وارد کنید");
+        $out=json_encode($json);
+        echo $out;
+        exit;
+    }
+}
 function insert($password , $fname , $lname , $email , $connection , $tel)
 {
     $pass=password_hash($password , PASSWORD_DEFAULT );
@@ -39,7 +53,6 @@ function insert($password , $fname , $lname , $email , $connection , $tel)
         echo $out;
     } 
 }
-
 function check_email_tel($result , $email , $tel)
 {
     foreach ($result as $o) 
