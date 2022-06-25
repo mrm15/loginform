@@ -42,11 +42,12 @@ foreach ($_REQUEST as $key => $value)
                 {
                     $tel=$r['value'];
                     $tel = preg_replace("/(?<!\s);(?!\s)/", "", $tel);
-                    if (strlen($tel) <= 11 || strlen($tel) >= 11) 
+                    if (strlen($tel) < 11 || strlen($tel) > 11) 
                     {
                         $json=array('status'=>FALSE , 'data'=>"شماره تلفن باید حتما 11 رقم باشد");
                         $out=json_encode($json);
                         echo $out;
+                        exit;
                     }
                 }
                 if ($r['name'] == "password") 
@@ -54,11 +55,12 @@ foreach ($_REQUEST as $key => $value)
                     $password=$r['value'];
                     $password = preg_replace("/(?<!\s);(?!\s)/", "", $password);
 
-                    if (strlen($password) < 8) 
+                    if (strlen($password) <= 8) 
                     {
-                        $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل 8 کاراکتر باشد");
+                        $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل شامل 8 کاراکتر باشد");
                         $out=json_encode($json);
                         echo $out;
+                        exit;
                     }
                 }
             }
