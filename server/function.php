@@ -38,6 +38,7 @@ function check_email_tel($result , $email , $tel)
     }
 }
     //_______________________________________________________________________LOGIN_______________________________________________________________________
+    
     function passverify($connection , $password , $sql)
     {
         $result=mysqli_query($connection,$sql);
@@ -48,23 +49,20 @@ function check_email_tel($result , $email , $tel)
 
             if (password_verify($password , $data['password'])) 
             {
-                // $_SESSION['Id']=$data['id'];
-                // $_SESSION['name']=$data['fname'];
-
                 $messagg=array('status'=>TRUE , 'data'=>"شما وارد شدید");
                 $payaa=json_encode($messagg);
                 echo $payaa;
             }
             else 
             {
-                $messagg=array('status'=>FALSE , 'messagee'=>"رمز عبور نادرست است");
+                $messagg=array('status'=>FALSE , 'data'=>"رمز عبور نادرست است");
                 $payaa=json_encode($messagg);
                 echo $payaa;
             }
         }
         else 
         {
-            $messagg=array('status'=>FALSE , 'messagee'=>"کاربر با این مشخصات وجود ندارد");
+            $messagg=array('status'=>FALSE , 'data'=>"کاربر با این مشخصات وجود ندارد");
             $payaa=json_encode($messagg);
             echo $payaa;
         } 
