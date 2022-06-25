@@ -1,5 +1,3 @@
-# loginform
-
 # Front-End Description : 
 
 Codes : Jquery , Method : Ajax'GET 
