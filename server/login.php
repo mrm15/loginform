@@ -8,6 +8,8 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type:application/json");
 
+$email=[0];
+
 foreach ($_REQUEST as $key => $value) 
 {
     $password=null;
@@ -17,19 +19,22 @@ foreach ($_REQUEST as $key => $value)
         $login=$value;
         $login=json_decode($login,TRUE);
 
-        foreach ($login as $e) 
+        if (is_array($login) || is_object($login)) 
         {
-            if ($e['name'] == "email") 
+            foreach ($login as $e) 
             {
-                $email=$e['value'];
-            }
-            if ($e['name'] == "password") 
-            {
-                $password=$e['value'];
+                if ($e['name'] == "email") 
+                {
+                    $email=$e['value'];
+                }
+                if ($e['name'] == "password") 
+                {
+                    $password=$e['value'];
+                }
             }
         }
 
-        $sql ="SELECT * from register where `email`='$email' ";
+        $sql ="SELECT * FROM register where `email`='$email' ";
 
         if (mysqli_query($connection,$sql) )
         {   
