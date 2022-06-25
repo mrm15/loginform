@@ -51,24 +51,23 @@
                             return;
                         }
             }
-            
-                function second_insert($fname, $lname , $email , $email1 , $tel ,$tel1 , $password , $connection)
-                {
-                    if ( $email1!=$email  &&  $tel1!=$tel) 
-                    {
-                        $pass=password_hash($password , PASSWORD_DEFAULT );
+    }
 
-                        $sql = "INSERT INTO register (`fname` , `lname` , `email` , `tel` , `password`) VALUES ('$fname' , '$lname' , '$email' , '$tel' , '$pass')";
-                    
-                        if (mysqli_query($connection, $sql)) 
-                        {
-                            $messagg=array('status'=>TRUE , 'data'=>"اطلاعات کاربری شما با موفقیت ثبت شد");
-                            $paya=json_encode($messagg);
-                            echo $paya;
-                        } 
-                    }
-                }
+    function second_insert($fname, $lname , $email , $email1 , $tel ,$tel1 , $password , $connection)
+    {
+        if ( $email1!=$email  &&  $tel1!=$tel) 
+        {
+            $pass=password_hash($password , PASSWORD_DEFAULT );
 
+            $sql = "INSERT INTO register (`fname` , `lname` , `email` , `tel` , `password`) VALUES ('$fname' , '$lname' , '$email' , '$tel' , '$pass')";
+        
+            if (mysqli_query($connection, $sql)) 
+            {
+                $messagg=array('status'=>TRUE , 'data'=>"اطلاعات کاربری شما با موفقیت ثبت شد");
+                $paya=json_encode($messagg);
+                echo $paya;
+            } 
+        }
     }
 
 
