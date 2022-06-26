@@ -1,0 +1,22 @@
+.cap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    direction: ltr;
+
+    color: red;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin: 0.5rem 0.5rem;
+
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    
+    width: max-content;
+
+    text-align: center;
+}
