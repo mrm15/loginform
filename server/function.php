@@ -1,7 +1,32 @@
 <?php
+
 function check_tel($tel)
 {
-    if (strlen($tel) < 11 || strlen($tel) > 11 && $tel[0] == 0) 
+    $tel=trim($tel);
+    // $tel=explode('0', $tel);
+
+    // if (!filter_var($tel[0],FILTER_VALIDATE_INT) )
+    // {
+    //     $json=array('status'=>FALSE , 'data'=>"شماره تلفن باید حتما عدد باشد");
+    //     $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+    //     echo $out;
+    //     exit;
+    // }
+    if (strstr($tel , "$") || strstr($tel , "_" )  || strstr($tel , "*")  ||  strstr($tel , "%") || strstr($tel , "!") || strstr($tel , "%") ) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"شماره تلفن را صحیح وارد کنید");
+        $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
+    if ($tel[0] != 0  ||  $tel[1] != 9 ) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"شماره تلفن باید با 0 و 9 آغاز شود");
+        $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
+    if (strlen($tel) < 11 && strlen($tel) > 11) 
     {
         $json=array('status'=>FALSE , 'data'=>"شماره تلفن حتما باید 11 رقم باشد و با صفر شروع شود");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
@@ -9,8 +34,17 @@ function check_tel($tel)
         exit;
     }
 }
-function check_pass($password)
-{
+function check_pass($password) //اوکی شد
+{    
+    $password=trim($password);
+    $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/";
+    if(!preg_match($regex, $password)) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"رمز عبور رو درست بزن");
+        $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
     if (strlen($password) < 8) 
     {
         $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل شامل 8 کاراکتر باشد");
@@ -18,17 +52,30 @@ function check_pass($password)
         echo $out;
         exit;
     }
+    // if(preg_match("/^(?=.*[A-z])(?=.*[0-9])(?=.*[$@])\S{6,12}$/", $password))
+    // {
+    //     $json=array('status'=>FALSE , 'data'=>"رمز عبور باید شامل حروف بزرگ و کوچک باشد و شامل اعداد 1 تا 9 باشد");
+    //     $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+    //     echo $out;
+    //     exit;
+    // } 
 }
-function check_fname($fname)
+    
+
+
+function check_fname($fname)  //اوکی شد
 {
-    if (strlen($fname) <=3) 
+    $fname=trim($fname);
+    $tedad=mb_strlen($fname);
+
+    if ($tedad < 3) 
     {
         $json=array('status'=>FALSE , 'data'=>"نام نمیتواند کمتر از 3 حروف باشد");
         $out=json_encode($json, JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         echo $out;
         exit;
     }
-    if (strstr($fname,"$") || strstr($fname,"_" ) || strstr($fname,"@") || strstr($fname , "*")  ||  strstr($fname , "%") || strstr($fname , "!")) 
+    if (strstr($fname,"$") || strstr($fname,"_" ) || strstr($fname,"@") || strstr($fname , "*")  ||  strstr($fname , "%") || strstr($fname , "!") || strstr($fname , "1") || strstr($fname , "2")|| strstr($fname , "3")|| strstr($fname, "4")|| strstr($fname , "5")|| strstr($fname , "6")|| strstr($fname , "7")|| strstr($fname , "8")|| strstr($fname , "9"))  
     {
         $json=array('status'=>FALSE , 'data'=>"نام را صحیح وارد کنید");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
@@ -36,16 +83,18 @@ function check_fname($fname)
         exit;
     }
 }
-function check_lname($lname)
+function check_lname($lname) //اوکی شد
 {
-    if (strlen($lname) <=3) 
+    $lname=trim($lname);
+    $tedad=mb_strlen($lname);
+    if ($tedad < 3) 
     {
         $json=array('status'=>FALSE , 'data'=>"نام خانوادگی نمیتواند کمتر از 3 حروف باشد");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         echo $out;
         exit;
     }
-    if (strstr($lname , "$") || strstr($lname , "_" ) || strstr($lname , "@") || strstr($lname , "*")  ||  strstr($lname , "%") || strstr($lname , "!")) 
+    if (strstr($lname , "$") || strstr($lname , "#" ) || strstr($lname , "_" ) || strstr($lname , "@") || strstr($lname , "*")  ||  strstr($lname , "%") || strstr($lname , "!") || strstr($lname , "1") || strstr($lname , "2")|| strstr($lname , "3")|| strstr($lname , "4")|| strstr($lname , "5")|| strstr($lname , "6")|| strstr($lname , "7")|| strstr($lname , "8")|| strstr($lname , "9")) 
     {
         $json=array('status'=>FALSE , 'data'=>"نام خانوادگی را صحیح وارد کنید");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
@@ -53,8 +102,16 @@ function check_lname($lname)
         exit;
     }
 }
-function check_email($email)
+function check_email($email)  //ایمیل اوکی شد
 {
+    $email=trim($email);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"فرمت ایمیل شما صحیح نیست");
+        $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
     if (!strstr($email , "@")) 
     {
         $json=array('status'=>FALSE , 'data'=>"ایمیل باید حتما شامل @ باشد");
@@ -62,7 +119,7 @@ function check_email($email)
         echo $out;
         exit;
     }
-    if (strstr($email , "$") || strstr($email , "_" )  || strstr($email , "*")  ||  strstr($email , "%") || strstr($email , "!")) 
+    if (strstr($email , "$") || strstr($email , "_" )  || strstr($email , "*")  ||  strstr($email , "%") || strstr($email , "!") || strstr($email , "%")) 
     {
         $json=array('status'=>FALSE , 'data'=>"ایمیل را صحیح وارد کنید");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
