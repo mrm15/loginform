@@ -38,3 +38,13 @@ function DUPLICATE(e, page, form) {
     });
   }
 }
+
+
+// (B) PREVENT CLIPBOARD COPYING
+captcha.addEventListener("copy", (evt) => {
+  // (B1) CHANGE THE COPIED TEXT IF YOU WANT
+  evt.clipboardData.setData("بشین تا کپی شه :)");
+ 
+  // (B2) PREVENT THE DEFAULT COPY ACTION
+  evt.preventDefault();
+}, false);
