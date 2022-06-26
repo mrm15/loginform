@@ -3,15 +3,14 @@
 function check_tel($tel)
 {
     $tel=trim($tel);
-    // $tel=explode('0', $tel);
 
-    // if (!filter_var($tel[0],FILTER_VALIDATE_INT) )
-    // {
-    //     $json=array('status'=>FALSE , 'data'=>"شماره تلفن باید حتما عدد باشد");
-    //     $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-    //     echo $out;
-    //     exit;
-    // }
+    if(!preg_match('/^09\d{9}$/', $tel))
+    {
+        $json=array('status'=>FALSE , 'data'=>"شماره تلفن را صحیح وارد کنید");
+        $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
     if (strstr($tel , "$") || strstr($tel , "_" )  || strstr($tel , "*")  ||  strstr($tel , "%") || strstr($tel , "!") || strstr($tel , "%") ) 
     {
         $json=array('status'=>FALSE , 'data'=>"شماره تلفن را صحیح وارد کنید");
@@ -52,17 +51,7 @@ function check_pass($password) //اوکی شد
         echo $out;
         exit;
     }
-    // if(preg_match("/^(?=.*[A-z])(?=.*[0-9])(?=.*[$@])\S{6,12}$/", $password))
-    // {
-    //     $json=array('status'=>FALSE , 'data'=>"رمز عبور باید شامل حروف بزرگ و کوچک باشد و شامل اعداد 1 تا 9 باشد");
-    //     $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-    //     echo $out;
-    //     exit;
-    // } 
 }
-    
-
-
 function check_fname($fname)  //اوکی شد
 {
     $fname=trim($fname);
