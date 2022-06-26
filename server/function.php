@@ -95,14 +95,14 @@ function check_email_tel($result , $email , $tel)
             $messagg=array('status'=>FALSE , 'data'=>"ایمیل شما تکراری است");
             $ppaya=json_encode($messagg , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
             echo $ppaya;
-            return;
+            exit;
         }
         if($tel1 == $tel) 
         {
             $messagg=array('status'=>FALSE , 'data'=>"شماره تلفن شما تکراری است");
             $paya=json_encode($messagg , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
             echo $paya;
-            return;
+            exit;
         }
     }
 }
@@ -120,12 +120,14 @@ function passverify($connection , $password , $sql)
             $messagg=array('status'=>TRUE , 'data'=>"شما وارد شدید");
             $payaa=json_encode($messagg , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
             echo $payaa;
+            exit;
         }
         else 
         {
             $messagg=array('status'=>FALSE , 'data'=>"رمز عبور نادرست است");
             $payaa=json_encode($messagg , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
             echo $payaa;
+            exit;
         }
     }
     else 
@@ -133,6 +135,7 @@ function passverify($connection , $password , $sql)
         $messagg=array('status'=>FALSE , 'data'=>"کاربر با این مشخصات وجود ندارد");
         $payaa=json_encode($messagg, JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         echo $payaa;
+        exit;
     } 
 }
     // _______________________________________________________________________Forgetpass_______________________________________________________________________
