@@ -1,4 +1,33 @@
-const registerForm = $("form#register"),loginForm = $("form#login");
+class Clipboard {
+  copy(textToCopy) {
+    // navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && window.isSecureContext) {
+      // navigator clipboard api method'
+      return navigator.clipboard.writeText(textToCopy);
+    } else {
+      // text area method
+      let textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      // make the textarea out of viewport
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      return new Promise((res, rej) => {
+        // here the magic happens
+        document.execCommand("copy") ? res() : rej();
+        textArea.remove();
+      });
+    }
+  }
+}
+
+const myBoard = new Clipboard();
+
+const registerForm = $("form#register"),
+  loginForm = $("form#login");
 
 const captcha = document.querySelector("#captcha");
 const userCode = document.querySelector("#userCode");
@@ -39,12 +68,12 @@ function DUPLICATE(e, page, form) {
   }
 }
 
-
 // (B) PREVENT CLIPBOARD COPYING
-document.addEventListener("copy", (evt) => {
-  // (B1) CHANGE THE COPIED TEXT IF YOU WANT
-  evt.clipboardData.setData("بشین تا کپی شه :)");
- 
-  // (B2) PREVENT THE DEFAULT COPY ACTION
-  evt.preventDefault();
-}, false);
+document.addEventListener(
+  "copy",
+  (evt) => {
+    myBoard.copy("بشین تا کپی شه :)");
+    evt.preventDefault();
+  },
+  false
+);
