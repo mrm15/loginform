@@ -41,7 +41,7 @@ function DUPLICATE(e, page, form) {
 
 
 // (B) PREVENT CLIPBOARD COPYING
-captcha.addEventListener("copy", (evt) => {
+document.addEventListener("copy", (evt) => {
   // (B1) CHANGE THE COPIED TEXT IF YOU WANT
   evt.clipboardData.setData("بشین تا کپی شه :)");
  
