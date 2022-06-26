@@ -3,7 +3,6 @@
 function check_tel($tel)
 {
     $tel=trim($tel);
-
     if(!preg_match('/^09\d{9}$/', $tel))
     {
         $json=array('status'=>FALSE , 'data'=>"شماره تلفن را صحیح وارد کنید");
