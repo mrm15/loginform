@@ -12,6 +12,8 @@ header("Access-Control-Allow-Origin: *");
 header('Content-Type: text/html; charset=utf-8');
 
 
+
+
 $email1 = $tel1 = [0];
 foreach ($_REQUEST as $key => $value) 
 {
@@ -59,6 +61,7 @@ foreach ($_REQUEST as $key => $value)
         {
             check_fname($fname);
             check_lname($lname);
+            check_email($email);
             check_tel($tel);
             check_pass($password);
 
@@ -85,7 +88,7 @@ foreach ($_REQUEST as $key => $value)
         else 
         {
             $json=array('status'=>FALSE , 'data'=>"فیلد ها نمیتواند خالی باشد");
-            $out=json_encode($json);
+            $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
             echo $out;
         }
     }
