@@ -31,10 +31,10 @@
 }
 
 .cap::selection {
-    background-color: red;
-    color: red;
+    background-color: skyblue;
+    color: black;
 }
 ::-moz-selection {
-    background-color: red;
-    color: red;
+    background-color: skyblue;
+    color: black;
 }
