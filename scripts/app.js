@@ -9,5 +9,9 @@ if (registerForm[0]) {
 function DUPLICATE(e, page, form) {
   e.preventDefault();
   // Call Register.php (main back-end code) fetch
-  fetch(`server/${page}.php?${page}=${JSON.stringify(form.serializeArray())}`);
+  if (page === "register") {
+    fetch(`server/${page}.php?${page}=${JSON.stringify(form.serializeArray())}`);
+  } else {
+    fetch(`../server/${page}.php?${page}=${JSON.stringify(form.serializeArray())}`);
+  }
 }
