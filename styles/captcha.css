@@ -1,26 +1,30 @@
 .cap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background: url(../captcha-bg.png) !important;
 
-    direction: ltr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    color: red;
-    user-select: none;
-    -webkit-user-drag: none;
+  direction: ltr;
 
-    font-size: 1.5rem;
-    padding: 1rem;
-    margin: 0.5rem 0.5rem;
+  color: rgba(0, 0, 0, 0.2);
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 
-    border: 1.5px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    
-    width: max-content;
+  font-size: 1rem;
+  padding: 1rem;
+  margin: 0.5rem 0.5rem;
 
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    
-    text-align: center;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+
+  width: max-content;
+
+  text-align: center;
+}
+#captcha {
+  font-size: 1.5;
 }
