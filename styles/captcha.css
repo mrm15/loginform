@@ -34,3 +34,7 @@
     background-color: red;
     color: red;
 }
+::-moz-selection {
+    background-color: red;
+    color: red;
+}
