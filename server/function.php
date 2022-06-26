@@ -55,6 +55,13 @@ function check_lname($lname)
 }
 function check_email($email)
 {
+    if (!strstr($email , "@")) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"ایمیل باید حتما شامل @ باشد");
+        $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
     if (strstr($email , "$") || strstr($email , "_" )  || strstr($email , "*")  ||  strstr($email , "%") || strstr($email , "!")) 
     {
         $json=array('status'=>FALSE , 'data'=>"ایمیل را صحیح وارد کنید");
