@@ -18,5 +18,9 @@
     
     width: max-content;
 
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    
     text-align: center;
 }
