@@ -1,15 +1,14 @@
 // Get Register Form
-const registerForm = $("form#register"),
-  loginForm = $("form#login");
+const registerForm = $("form#register"),loginForm = $("form#login");
 // Create empty let for create url and send to back-end
 let information, url;
 // Check Exist RegisterForm
 if (registerForm[0]) {
-  registerForm[0].addEventListener("submit", (e) => {
+  registerForm[0].addEventListener("submit", e => {
     DUPLICATE(e, "register", registerForm);
   });
 } else if (loginForm[0]) {
-  loginForm[0].addEventListener("submit", (e) => {
+  loginForm[0].addEventListener("submit", e => {
     DUPLICATE(e, "login", loginForm);
   });
 }
