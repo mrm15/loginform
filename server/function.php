@@ -54,6 +54,13 @@ function check_pass($password) //اوکی شد
 function check_fname($fname)  //اوکی شد
 {
     $fname=trim($fname);
+    if (empty($fname)) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"نام نمیتواند خالی باشد");
+        $out=json_encode($json, JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
     $tedad=mb_strlen($fname);
 
     if ($tedad < 3) 
@@ -74,6 +81,13 @@ function check_fname($fname)  //اوکی شد
 function check_lname($lname) //اوکی شد
 {
     $lname=trim($lname);
+    if (empty($lname)) 
+    {
+        $json=array('status'=>FALSE , 'data'=>"نام خانوادگی نمیتواند خالی باشد");
+        $out=json_encode($json, JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        echo $out;
+        exit;
+    }
     $tedad=mb_strlen($lname);
     if ($tedad < 3) 
     {
