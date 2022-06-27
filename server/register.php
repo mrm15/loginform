@@ -28,31 +28,31 @@ foreach ($_REQUEST as $key => $value)
                 if ($r['name'] == "fname") 
                 {
                     $fname=$r['value'];
-                    $fname = preg_replace("/(?<!\s);(?!\s)/", "" , $fname);
+                    // $fname = preg_replace("/(?<!\s);(?!\s)/", "" , $fname);
                     // $fname = preg_replace('/[0-9]+/', '', $fname);  
                     // $fname = preg_replace("/[^A-Za-z0-9_\?\-\(\)\! \ا\ب\پ\ت\ث\ج\چ\ح\خ\د\ذ\ر\ز\ژ\س\ش\ص\ض\ط\ظ\ع\غ\ف\ق\ک\گ\ل\م\ن\و\ه\ی\ك\آ\ي\ئ]/", "", $fname);
                 }
                 if ($r['name'] == "lname") 
                 {
                     $lname=$r['value'];
-                    $lname = preg_replace("/(?<!\s);(?!\s)/", "", $lname);
+                    // $lname = preg_replace("/(?<!\s);(?!\s)/", "", $lname);
                     // $lname = preg_replace('/[0-9]+/', '', $lname);
                     // $lname = preg_replace("/[^A-Za-z0-9_\?\-\(\)\! \ا\ب\پ\ت\ث\ج\چ\ح\خ\د\ذ\ر\ز\ژ\س\ش\ص\ض\ط\ظ\ع\غ\ف\ق\ک\گ\ل\م\ن\و\ه\ی\ك\آ\ي\ئ]/", "", $lname);
                 }
                 if ($r['name'] == "email") 
                 {
                     $email=$r['value'];
-                    $email = preg_replace("/(?<!\s);(?!\s)/", "", $email);
+                    // $email = preg_replace("/(?<!\s);(?!\s)/", "", $email);
                 }
                 if ($r['name'] == "tel") 
                 {
                     $tel=$r['value'];
-                    $tel = preg_replace("/(?<!\s);(?!\s)/", "", $tel);
+                    // $tel = preg_replace("/(?<!\s);(?!\s)/", "", $tel);
                 }
                 if ($r['name'] == "password") 
                 {
                     $password=$r['value'];
-                    $password = preg_replace("/(?<!\s);(?!\s)/", "", $password);
+                    // $password = preg_replace("/(?<!\s);(?!\s)/", "", $password);
                 }
             }
         }
