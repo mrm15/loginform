@@ -5,14 +5,14 @@ function check_tel($tel)
     $tel=trim($tel);
     if(!preg_match('/^09\d{9}$/', $tel))
     {
-        $json=array('status'=>FALSE , 'data'=>"شماره تلفن را صحیح وارد کنید");
+        $json=array('status'=>FALSE , 'data'=>"شماره تلفن را حتما به عدد وارد کنید");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         echo $out;
         exit;
     }
     if (strstr($tel , "$") || strstr($tel , "_" )  || strstr($tel , "*")  ||  strstr($tel , "%") || strstr($tel , "!") || strstr($tel , "%") ) 
     {
-        $json=array('status'=>FALSE , 'data'=>"شماره تلفن را صحیح وارد کنید");
+        $json=array('status'=>FALSE , 'data'=>"شماره تلفن نمیتواند شامل کاراکتر باشد");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         echo $out;
         exit;
@@ -38,7 +38,7 @@ function check_pass($password) //اوکی شد
     $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/";
     if(!preg_match($regex, $password)) 
     {
-        $json=array('status'=>FALSE , 'data'=>"رمز عبور رو درست بزن");
+        $json=array('status'=>FALSE , 'data'=>"رمز عبور باید حداقل ۶ حرف و ترکیبی از حروف بزرگ، حروف کوچک، اعداد و کاراکترهای غیر الفبا مانند #$%! باشد.");
         $out=json_encode($json , JSON_PRESERVE_ZERO_FRACTION|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         echo $out;
         exit;
